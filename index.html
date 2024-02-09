@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Annual Goals</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 70%;
+            margin: 0 auto;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">My Annual Goals</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Goals</th>
+                <th>Owner</th>
+                <th>Time Left</th>
+            </tr>
+        </thead>
+        <tbody id="goal-table-body">
+            <!-- Goals will be inserted here -->
+        </tbody>
+    </table>
+    <div class="countdown-container" id="countdown"></div>
+
+    <script>
+        // Sample data
+        const goals = [
+            {
+                name: "Estudar cursos na Alura",
+                owner: "Ariano Silva",
+                timeLeft: {
+                    days: 7,
+                    hours: 13,
+                    minutes: 18,
+                    seconds: 13
+                }
+            },
+            {
+                name: "Criar projetos em JavaScript",
+                owner: "Luis",
+                timeLeft: {
+                    days: 30,
+                    hours: 12,
+                    minutes: 20,
+                    seconds: 45
+                }
+            },
+            {
+                name: "Criar um portfolio",
+                owner: "Luis",
+                timeLeft: {
+                    days: 30,
+                    hours: 12,
+                    minutes: 20,
+                    seconds: 45
+                }
+            },
+            {
+                name: "Estudar 4 cursos na Alura",
+                owner: "Ariano Silva",
+                timeLeft: {
+                    days: 45,
+                    hours: 0,
+                    minutes: 0,
+                    seconds: 0
+                }
+            }
+        ];
+
+        // Function to update the countdown
+        function updateCountdown() {
+            const countdownElement = document.getElementById("countdown");
+            const countdownText = `Tempo para completar objetivo: ${goals[0].timeLeft.days} dias, ${goals[0].timeLeft.hours} horas, ${goals[0].timeLeft.minutes} minutos, ${goals[0].timeLeft.seconds} segundos`;
+            countdownElement.innerHTML = countdownText;
+
+            // Update the countdown every second
+            setTimeout(updateCountdown, 1000);
+        }
+
+        // Function to insert goal rows into the table
+        function insertGoalRows() {
+            const goalTableBody = document.getElementById("goal-table-body");
+
+            goals.forEach((goal) => {
+                const goalRow = document.createElement("tr");
+
+                const nameCell = document.createElement("td");
+                nameCell.textContent = goal.name;
